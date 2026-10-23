@@ -184,7 +184,7 @@ async def test_permission_requirement_asks_only_about_review_calls() -> None:
     turn = [call("issue_refund", REFUND, "r1"), call("send_email", HELLO, "c1"), call("send_email", LEAK, "c2")]
     output = await agent(model(turn, "Done."), tools.all, requirements=[requirement], middlewares=[guard]).run("go")
     assert [request.tool.name for request in asked] == ["issue_refund"]
-    assert tools.names == ["issue_refund", "send_email"]
+    assert sorted(tools.names) == ["issue_refund", "send_email"]  # parallel calls finish in any order
     assert results(output)["c2"].startswith(BLOCKED)
 
 

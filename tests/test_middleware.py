@@ -59,7 +59,7 @@ async def test_parallel_calls_are_decided_one_by_one() -> None:
     tools = Tools()
     turn = [call("send_email", LEAK, "c1"), call("send_email", HELLO, "c2"), call("get_weather", {"city": "Oslo"}, "w")]
     output = await agent(model(turn, "Done."), tools.all, middlewares=[_guard()]).run("go")
-    assert tools.names == ["send_email", "get_weather"]
+    assert sorted(tools.names) == ["get_weather", "send_email"]  # parallel calls finish in any order
     assert results(output)["c1"].startswith(BLOCKED)
 
 
