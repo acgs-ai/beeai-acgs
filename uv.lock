@@ -202,7 +202,7 @@ typing = [
 
 [package.metadata]
 requires-dist = [
-    { name = "acgs-lite", specifier = ">=3.0.1,<4" },
+    { name = "acgs-lite", specifier = ">=3.0.1,<5" },
     { name = "beeai-framework", specifier = ">=0.1.85,<0.2" },
 ]
 
