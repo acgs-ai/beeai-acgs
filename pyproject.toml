@@ -25,7 +25,7 @@ classifiers = [
 ]
 dependencies = [
     "beeai-framework>=0.1.85,<0.2",
-    "acgs-lite>=3.0.1,<4",
+    "acgs-lite>=3.0.1,<5",
 ]
 
 [project.urls]
