@@ -34,11 +34,36 @@ pip install beeai-acgs
 
 Requires Python 3.11 to 3.13, `beeai-framework>=0.1.85,<0.2` and `acgs-lite>=3.0.1,<5`.
 
+### Compatibility
+
+| Component | Supported range | 0.2.0 validation |
+|---|---|---|
+| acgs-lite | `>=3.0.1,<5` | 4.0.0 tested via `uv.lock` and the default environment; 3.0.1 floor tested by the CI `test-min` job |
+| BeeAI Framework | `>=0.1.85,<0.2` | 0.1.85 with scripted models, nested tool calls and review handling |
+| Python | `>=3.11,<3.14` | CI tests 3.11, 3.12 and 3.13; strict typing targets 3.11 |
+
+The adapter formats tool arguments as text and calls `GovernanceEngine.validate`. It does not select the
+production authorization profile or issue signed receipts. Its formatter handles nested JSON-native arguments
+and renders bytes/bytearray as scalar text for rule matching.
+
 acgs-lite 4 is a major release. Its production profile of `GovernedCallable` requires an Ed25519
 receipt signer, governed payloads are JSON-only, and `GovernedAgent` no longer passes per-call keyword arguments to
 rule conditions (see the [acgs-lite changelog](https://github.com/acgs-ai/acgs-lite/blob/main/CHANGELOG.md)). This
 adapter works with both majors, but a fresh environment installs the newest version allowed. To stay on 3.x, also
 require `"acgs-lite<4"`, for example `pip install beeai-acgs "acgs-lite<4"`.
+
+### Offline deny-and-audit example
+
+Run [examples/deny_and_audit.py](examples/deny_and_audit.py) without an API key or network access:
+
+```bash
+uv run --no-sync python examples/deny_and_audit.py
+```
+
+A scripted `RequirementAgent` requests one allowed note and one denied note through `ACGSMiddleware`. Only the
+allowed tool executes. The example then prints both decisions, including tool name, verdict, reason and rule IDs.
+This application trail omits argument values and stays in memory; it is not a signed receipt or a durable engine
+audit log.
 
 ## Usage
 

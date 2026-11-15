@@ -6,6 +6,19 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 
 ## [Unreleased]
 
+## 0.2.0 (unreleased)
+
+### Added
+
+- Offline `examples/deny_and_audit.py`: one allowed and one denied BeeAI tool call, with an application decision trail.
+- Regression coverage for nested JSON-native arguments and bytes/bytearray formatting against acgs-lite 4.0.0.
+
+### Changed
+
+- Document the compatibility matrix: the locked test environment resolves acgs-lite 4.0.0, while the CI `test-min`
+  job tests the 3.0.1 floor. Runtime support remains `acgs-lite>=3.0.1,<5`; dependency pins are unchanged.
+- Clarify that the adapter validates formatted tool calls and does not issue signed receipts.
+
 ## 0.1.0 (2026-10-23)
 
 ### Added
