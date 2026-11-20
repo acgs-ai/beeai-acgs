@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "beeai-acgs"
-version = "0.1.0"
+version = "0.2.0"
 description = "ACGS rule-based tool-call governance for BeeAI Framework agents, via run middleware"
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
